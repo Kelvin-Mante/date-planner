@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#743149" />
+    <meta name="description" content="A little note for Boluwatife." />
+    <title>A little note for Boluwatife</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" defer></script>
+    <script src="supabase-config.js" defer></script>
+    <script src="app.js" defer></script>
+  </head>
+  <body>
+    <main class="page">
+      <section class="landing" id="landing" aria-label="A note for Boluwatife">
+        <p class="eyebrow">A LITTLE NOTE FOR</p>
+        <h1 class="recipient">Boluwatife</h1>
+
+        <button class="envelope" id="open-envelope" type="button" aria-label="Open your note" aria-controls="invitation" aria-expanded="false">
+          <span class="letter"><span>JUST FOR YOU</span><strong>B</strong></span>
+          <span class="envelope-back"></span>
+          <span class="envelope-flap"></span>
+          <span class="envelope-front"></span>
+          <span class="seal" aria-hidden="true"></span>
+        </button>
+
+        <p class="tap-hint">A little note, just for you</p>
+      </section>
+
+      <section class="invitation" id="invitation" aria-labelledby="question" aria-live="polite" hidden>
+        <p class="eyebrow">HEY, BOLUWATIFE</p>
+        <h2 id="question" tabindex="-1">Would you like to go<br class="wide-break" /> on a date with me?</h2>
+        <p class="invite-note">I’d really love to take you out.</p>
+        <div class="answers" id="answers">
+          <button class="yes-button" id="yes-button" type="button">Yes, I’d love to</button>
+          <button class="no-button" id="no-button" type="button" aria-describedby="no-hint">No</button>
+        </div>
+        <p class="hint" id="no-hint" aria-live="polite">(the “no” is a little shy)</p>
+      </section>
+
+      <section class="date-picker" id="date-picker" aria-labelledby="date-question" hidden>
+        <p class="eyebrow">OUR LITTLE DATE</p>
+        <h2 id="date-question" tabindex="-1">What sounds like your kind of date?</h2>
+        <p class="invite-note">Pick the one you’d enjoy most.</p>
+        <div class="date-grid">
+          <button class="date-option" type="button" data-choice="Just hang out">
+            <img src="https://images.unsplash.com/photo-1611892440504-42a792e24d32?auto=format&fit=crop&w=720&q=75" alt="A comfortable hotel room with a soft, warm glow" loading="lazy" />
+            <span class="date-copy"><strong>Just hang out</strong><small>No big plans, just spending time together.</small></span>
+          </button>
+          <button class="date-option" type="button" data-choice="Cute café date">
+            <img src="https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?auto=format&fit=crop&w=720&q=75" alt="A welcoming café with warm light" loading="lazy" />
+            <span class="date-copy"><strong>Cute café date</strong><small>Coffee, something sweet, and us.</small></span>
+          </button>
+          <button class="date-option" type="button" data-choice="Dinner date">
+            <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=720&q=75" alt="A candlelit dinner table set for two" loading="lazy" />
+            <span class="date-copy"><strong>Dinner date</strong><small>A lovely meal and good conversation.</small></span>
+          </button>
+          <button class="date-option" type="button" data-choice="Something else">
+            <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=720&q=75" alt="A warmly lit place to spend time together" loading="lazy" />
+            <span class="date-copy"><strong>Other</strong><small>Something you have in mind?</small></span>
+          </button>
+        </div>
+      </section>
+
+      <section class="availability" id="availability" aria-labelledby="availability-question" hidden>
+        <p class="eyebrow">LET’S MAKE A PLAN</p>
+        <h2 id="availability-question" tabindex="-1">When are you free to meet up?</h2>
+        <p class="chosen-plan">I’m thinking: <strong id="chosen-date"></strong></p>
+        <label class="date-label" for="free-date">Pick a day that works for you</label>
+        <input id="free-date" class="free-date" type="date" />
+        <label class="date-label time-label" for="time-preference">What time of day feels best?</label>
+        <select id="time-preference" class="time-preference">
+          <option value="Any time">No preference</option>
+          <option value="Afternoon">Afternoon</option>
+          <option value="Evening">Evening</option>
+        </select>
+        <label class="date-label note-label" for="extra-note">Anything else you’d like me to know? <span>(optional)</span></label>
+        <textarea id="extra-note" class="extra-note" rows="3" maxlength="500" placeholder="A little idea, something you’d like to eat, or just a note for me…"></textarea>
+        <button class="submit-button" id="submit-availability" type="button">Send this date</button>
+        <button class="flexible-button" id="flexible-button" type="button">I’m flexible — you pick</button>
+        <p class="availability-note" id="availability-note" aria-live="polite">Pick a day and send it, or choose “I’m flexible.”</p>
+      </section>
+    </main>
+    <p class="image-credit"><a href="https://unsplash.com/photos/soft-focus-photography-of-pink-flowers-_1jWseuuaF4" target="_blank" rel="noreferrer">Rose background photo by Sooz / Unsplash</a></p>
+  </body>
+</html>
+  
