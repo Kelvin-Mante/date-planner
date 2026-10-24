@@ -138,12 +138,25 @@ button { font: inherit; -webkit-tap-highlight-color: transparent; }
 
 .invitation {
   padding: clamp(28px,6vw,52px) clamp(20px,7vw,64px);
-  text-shadow: 0 1px 20px rgba(255,245,242,.7);
+  border: 1px solid rgba(255,255,255,.28);
+  border-radius: 26px;
+  color: #fff8fb;
+  background: rgba(40,13,34,.9);
+  box-shadow: 0 20px 54px rgba(22,5,17,.4), inset 0 1px 0 rgba(255,255,255,.22);
+  text-shadow: none;
+  backdrop-filter: blur(18px) saturate(125%);
   animation: question-pop .58s cubic-bezier(.16,1,.3,1) both;
 }
+.invitation .eyebrow { color: #ffd8e6; text-shadow: none; }
 .invitation .eyebrow { letter-spacing: .24em; }
-.invitation h2 { margin: 20px 0 0; color: var(--ink); font: 700 clamp(36px,8vw,62px)/1.06 Georgia,"Times New Roman",serif; letter-spacing: -.05em; text-wrap: balance; }
+.invitation h2 { margin: 20px 0 0; color: #fffafd; font: 700 clamp(36px,8vw,62px)/1.06 Georgia,"Times New Roman",serif; letter-spacing: -.05em; text-wrap: balance; }
 .invite-note { margin: 18px 0 0; color: #632741; font-family: Georgia,"Times New Roman",serif; font-size: 17px; font-style: italic; }
+.invitation .invite-note { color: #f4dbe6; }
+.invitation .hint { color: #f0dbe5; }
+body:has(.invitation:not([hidden])) {
+  background-color: #24101f;
+  background-image: radial-gradient(ellipse at 18% 14%,rgba(112,38,83,.56),transparent 45%),radial-gradient(ellipse at 84% 82%,rgba(82,31,71,.48),transparent 48%),linear-gradient(140deg,#1d101f,#32172f 56%,#21101e);
+}
 .answers { position: relative; display: flex; min-height: 82px; align-items: center; justify-content: center; gap: 13px; margin-top: 12px; }
 .answers button { min-height: 52px; border-radius: 999px; font-size: 15px; font-weight: 800; cursor: pointer; touch-action: manipulation; transition: transform .16s ease, box-shadow .16s ease, background .16s ease; }
 .yes-button { min-width: 160px; padding: 0 23px; border: 1px solid var(--berry); color: white; background: linear-gradient(110deg,#d63d68,#a91f4b); box-shadow: 0 8px 20px rgba(169,31,75,.2); }
@@ -153,6 +166,16 @@ button { font: inherit; -webkit-tap-highlight-color: transparent; }
 .answers button:focus-visible { outline: 3px solid var(--berry); outline-offset: 4px; }
 .hint { min-height: 18px; margin: 0; color: #704252; font-size: 12px; font-weight: 600; }
 .is-leaving { animation: leave .38s ease-in both; }
+.confetti-piece {
+  position: fixed;
+  z-index: 1000;
+  display: block;
+  border-radius: 2px;
+  box-shadow: 0 1px 4px rgba(38,12,30,.18);
+  pointer-events: none;
+  animation: confetti-fall 2s cubic-bezier(.18,.74,.28,1) both;
+  will-change: transform, opacity;
+}
 
 .date-picker, .availability {
   padding: clamp(24px,5vw,42px);
@@ -163,6 +186,17 @@ button { font: inherit; -webkit-tap-highlight-color: transparent; }
   backdrop-filter: blur(12px);
   animation: question-pop .48s cubic-bezier(.16,1,.3,1) both;
 }
+.availability {
+  border-color: rgba(255,255,255,.96);
+  color: #24131e;
+  background: rgba(255,252,250,.98);
+  box-shadow: 0 22px 70px rgba(47,11,31,.32), inset 0 1px 0 #fff;
+  backdrop-filter: blur(24px) saturate(110%);
+}
+.availability .eyebrow, .availability .date-label { color: #33202b; text-shadow: none; }
+.availability h2 { color: #24131e; text-shadow: none; }
+.availability .chosen-plan, .availability .availability-note { color: #382833; text-shadow: none; }
+.availability .chosen-plan strong { color: #5c203d; }
 .date-picker h2, .availability h2 { max-width: 540px; margin: 15px auto 0; color: var(--ink); font: 700 clamp(30px,6vw,48px)/1.08 Georgia,"Times New Roman",serif; letter-spacing: -.045em; text-wrap: balance; }
 .date-picker .invite-note { margin: 12px 0 0; }
 .date-grid { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 13px; margin-top: 26px; text-align: left; }
@@ -178,13 +212,15 @@ button { font: inherit; -webkit-tap-highlight-color: transparent; }
 .chosen-plan strong { color: var(--berry); font-style: normal; }
 .date-label { display: block; margin: 0 0 9px; color: #5f3546; font-size: 13px; font-weight: 700; }
 .date-label span { color: #8a6974; font-weight: 500; }
-.free-date, .time-preference, .extra-note { display: block; width: min(100%,380px); margin: 0 auto; border: 1px solid rgba(143,40,85,.24); border-radius: 14px; color: var(--ink); background: linear-gradient(180deg,rgba(255,255,255,.96),rgba(255,247,248,.94)); box-shadow: 0 4px 14px rgba(82,30,53,.07), inset 0 1px 0 #fff; font: inherit; transition: border-color .18s ease, box-shadow .18s ease, background .18s ease; }
+.free-date, .time-preference, .extra-note { display: block; width: min(100%,380px); margin: 0 auto; border: 1px solid rgba(255,255,255,.98); border-radius: 14px; color: #24131e; background: linear-gradient(145deg,rgba(255,255,255,.96),rgba(255,248,251,.91)); box-shadow: 0 8px 24px rgba(78,29,53,.14), 0 0 0 1px rgba(143,40,85,.1), inset 0 1px 0 #fff; backdrop-filter: blur(16px) saturate(130%); font: inherit; transition: border-color .18s ease, box-shadow .18s ease, background .18s ease; }
 .free-date, .time-preference { min-height: 50px; padding: 0 14px; }
 .time-label, .note-label { margin-top: 19px; }
 .time-preference { cursor: pointer; }
 .extra-note { min-height: 100px; padding: 13px 14px; line-height: 1.55; resize: vertical; }
-.extra-note::placeholder { color: #9a7b85; }
-.free-date:focus, .time-preference:focus, .extra-note:focus { border-color: rgba(143,40,85,.72); background: #fff; box-shadow: 0 0 0 4px rgba(233,70,114,.12), 0 8px 20px rgba(82,30,53,.09); outline: none; }
+.extra-note::placeholder { color: #55414d; opacity: 1; }
+.free-date:focus, .time-preference:focus, .extra-note:focus { border-color: rgba(132,39,82,.72); background: rgba(255,255,255,.82); box-shadow: 0 0 0 4px rgba(143,40,85,.15), 0 10px 26px rgba(64,23,46,.15), inset 0 1px 0 #fff; outline: none; }
+.free-date::-webkit-calendar-picker-indicator { opacity: .78; cursor: pointer; }
+.time-preference option { color: #351629; background: #fff8fb; }
 .free-date:disabled, .time-preference:disabled, .extra-note:disabled { opacity: .7; }
 .submit-button { min-height: 48px; margin-top: 13px; padding: 0 22px; border: 1px solid var(--berry); border-radius: 999px; color: #fff; background: linear-gradient(110deg,#d63d68,#a91f4b); box-shadow: 0 7px 17px rgba(169,31,75,.19); font-size: 14px; font-weight: 800; cursor: pointer; transition: transform .16s ease, box-shadow .16s ease, opacity .16s ease; }
 .submit-button:hover:not(:disabled) { transform: translateY(-2px); box-shadow: 0 10px 22px rgba(169,31,75,.26); }
@@ -197,13 +233,21 @@ button { font: inherit; -webkit-tap-highlight-color: transparent; }
 @keyframes appear { from { opacity: 0; transform: translateY(13px); } to { opacity: 1; transform: translateY(0); } }
 @keyframes question-pop { from { opacity: 0; transform: translateY(20px) scale(.94); } to { opacity: 1; transform: translateY(0) scale(1); } }
 @keyframes leave { to { opacity: 0; transform: translateY(-9px) scale(.98); } }
+@keyframes confetti-fall {
+  0% { opacity: 0; transform: translate3d(0,8px,0) rotate(0deg) scale(.55); }
+  9% { opacity: 1; }
+  34% { opacity: 1; transform: translate3d(var(--burst-x),var(--burst-y),0) rotate(var(--burst-spin)) scale(1.12); }
+  100% { opacity: 0; transform: translate3d(var(--drift),calc(var(--burst-y) + var(--fall)),0) rotate(var(--spin)) scale(.82); }
+}
 
 @media (max-width: 520px) {
   .page { width: 100%; align-content: center; padding: max(28px,env(safe-area-inset-top)) 16px max(28px,env(safe-area-inset-bottom)); }
   .landing, .invitation, .date-picker, .availability { width: 100%; }
   .envelope { width: min(82vw,310px); margin-top: 28px; }
   .tap-hint { margin-top: 20px; }
-  .invitation { padding: 35px 12px 29px; }
+  .invitation { max-width: 460px; padding: 32px 22px 27px; border-radius: 24px; }
+  .invitation h2 { margin-top: 15px; color: #fffafd; font-size: clamp(33px,8.8vw,42px); line-height: 1.1; letter-spacing: -.04em; }
+  .invitation .invite-note { margin-top: 14px; }
   .date-picker, .availability { padding: 28px 18px; border-radius: 22px; }
   .date-picker h2, .availability h2 { font-size: clamp(30px,8.2vw,39px); }
   .date-grid { grid-template-columns: 1fr; gap: 11px; margin-top: 21px; }
@@ -216,14 +260,18 @@ button { font: inherit; -webkit-tap-highlight-color: transparent; }
   .free-date, .time-preference, .extra-note { width: 100%; }
   .submit-button, .flexible-button { width: min(100%,380px); min-height: 52px; }
   .image-credit { position: static; padding: 0 14px max(10px,env(safe-area-inset-bottom)); text-align: center; }
+  .page:has(.availability:not([hidden])) { align-content: start; padding-top: max(18px,env(safe-area-inset-top)); }
+  .availability { margin-block: 0 20px; }
   .wide-break { display: none; }
-  .answers { width: 100%; gap: 9px; }
-  .yes-button { min-width: 0; flex: 1; padding: 0 16px; }
-  .no-button { position: static; min-width: 94px; padding: 0 17px; }
+  .answers { display: grid; grid-template-columns: minmax(0,1.25fr) minmax(86px,.75fr); width: 100%; min-height: 0; gap: 11px; margin: 22px auto 10px; }
+  .answers button { position: static; width: 100%; min-width: 0; min-height: 52px; padding: 0 10px; }
+  .yes-button { flex: none; }
+  .no-button { flex: none; }
+  .hint { color: #f0dbe5; }
 }
 @media (max-width: 360px) {
   .page { padding-right: 12px; padding-left: 12px; }
-  .invitation { padding-right: 4px; padding-left: 4px; }
+  .invitation { padding-right: 17px; padding-left: 17px; }
   .answers button { font-size: 14px; }
   .no-button { min-width: 83px; }
   .date-picker, .availability { padding: 25px 14px; }
@@ -233,4 +281,5 @@ button { font: inherit; -webkit-tap-highlight-color: transparent; }
 }
 @media (prefers-reduced-motion: reduce) {
   *,*::before,*::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+  .confetti-piece { display: none; }
 }
